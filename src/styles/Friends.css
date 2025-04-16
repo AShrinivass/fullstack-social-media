@@ -1,0 +1,32 @@
+.frnds-wrapper {
+  margin-bottom: 10px;
+}
+
+.frnds {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.frnd {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative; /* Needed for the badge to be placed correctly */
+  padding-left: 5px;
+}
+
+.frnd-img {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+}
+
+.frnd-name {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
