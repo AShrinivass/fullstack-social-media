@@ -27,6 +27,7 @@
   color: #1775ee;
   margin-bottom: 10px;
   text-align: center;
+  padding: 0;
 }
 
 .login-desc {
@@ -36,7 +37,6 @@
 }
 
 .login-box {
-  height: 300px;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
@@ -52,6 +52,7 @@
   font-size: 18px;
   padding-left: 20px;
   background-color: white;
+  color: black;
 }
 
 .login-input:focus {
@@ -67,6 +68,12 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+}
+.login-button:disabled{
+  cursor: not-allowed;
+}
+.login-register-button:disabled{
+  cursor: not-allowed;
 }
 
 .login-forgot {

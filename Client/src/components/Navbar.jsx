@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../styles/Navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 function Navbar() {
-  const PF = import.meta.env.REACT_APP_PUBLIC_FOLDER || "/assets/";
+  const { user } = useContext(AuthContext);
+  console.log(user);
+  const PF = import.meta.env.REACT_PUBLIC_FOLDER || "/assets/";
   return (
     <div className="nav-component">
       <div className="nav-left">
@@ -51,7 +54,17 @@ function Navbar() {
             <span className="nav-notif-badge">1</span>
           </div>
         </div>
-        <img className="nav-dp" src={PF + "person/1.jpeg"} alt="DP" />
+        <Link to={`/profile/${user.username}`}>
+          <img
+            className="nav-dp"
+            src={
+              user.profilePicture && user.profilePicture !== "default dp"
+                ? PF + user.profilePicture
+                : PF + "person/noAvatar.png"
+            }
+            alt="DP"
+          />
+        </Link>
       </div>
     </div>
   );

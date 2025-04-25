@@ -1,9 +1,11 @@
 import React from "react";
 import "../styles/Rightbar.css";
-import { Users, Posts } from "../dummyData.js";
 import Online from "./Online.jsx";
+import { Users } from "../dummyData.js";
 
 function Rightbar({ profile }) {
+  console.log(profile);
+
   const HomeRightbar = () => {
     return (
       <>
@@ -31,15 +33,28 @@ function Rightbar({ profile }) {
         <div className="rightbar-info">
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">City:</span>
-            <span className="rightbar-info-value">New York</span>
+            <span className="rightbar-info-value">
+              {profile.city || "Unknown"}
+              {/* mysore */}
+            </span>
           </div>
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">From:</span>
-            <span className="rightbar-info-value">Madrid</span>
+            <span className="rightbar-info-value">
+              {profile.from || "Unknown"}
+              {/* Cali */}
+            </span>
           </div>
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">Relationship:</span>
-            <span className="rightbar-info-value">Single</span>
+            <span className="rightbar-info-value">
+              {profile.relationship === 1
+                ? "Single"
+                : profile.relationship === 2
+                ? "In a relationship"
+                : "Unknown"}
+              {/* complicated */}
+            </span>
           </div>
         </div>
         <h4 className="rightbar-title">User friends</h4>
@@ -47,46 +62,6 @@ function Rightbar({ profile }) {
           <div className="rightbar-following">
             <img
               src="/assets/person/1.jpeg"
-              alt=""
-              className="rightbar-following-img"
-            />
-            <span className="rightbar-following-name">John Carter</span>
-          </div>
-          <div className="rightbar-following">
-            <img
-              src="/assets/person/2.jpeg"
-              alt=""
-              className="rightbar-following-img"
-            />
-            <span className="rightbar-following-name">John Carter</span>
-          </div>
-          <div className="rightbar-following">
-            <img
-              src="/assets/person/3.jpeg"
-              alt=""
-              className="rightbar-following-img"
-            />
-            <span className="rightbar-following-name">John Carter</span>
-          </div>
-          <div className="rightbar-following">
-            <img
-              src="/assets/person/4.jpeg"
-              alt=""
-              className="rightbar-following-img"
-            />
-            <span className="rightbar-following-name">John Carter</span>
-          </div>
-          <div className="rightbar-following">
-            <img
-              src="/assets/person/5.jpeg"
-              alt=""
-              className="rightbar-following-img"
-            />
-            <span className="rightbar-following-name">John Carter</span>
-          </div>
-          <div className="rightbar-following">
-            <img
-              src="/assets/person/6.jpeg"
               alt=""
               className="rightbar-following-img"
             />

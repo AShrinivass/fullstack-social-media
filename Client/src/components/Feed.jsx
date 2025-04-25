@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/Feed.css";
 import Share from "./Share";
 import Post from "./Post";
 import axios from "axios";
+import { AuthContext } from "../contexts/AuthContext";
 
-function Feed() {
+function Feed({ username }) {
   const [post, setPost] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get(
-        "http://localhost:3000/api/post/timeline/67ff2c7ee54868b8d260833b"
-      );
+      const res = username
+        ? await axios.get(`http://localhost:3000/api/post/profile/${username}`)
+        : await axios.get(
+            "http://localhost:3000/api/post/timeline/" + user._id
+          );
       console.log("API response:", res.data);
-      setPost(res.data);
+      setPost(
+        res.data.sort((p1, p2) => {
+          return new Date(p2.createdAt) - new Date(p1.createdAt);
+        })
+      );
     };
     fetchPosts();
-  }, []);
+  }, [username, user._id]);
 
   return (
     <div className="feed-element">

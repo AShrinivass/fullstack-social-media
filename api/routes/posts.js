@@ -72,3 +72,31 @@ router.get("/timeline/:id", async (req, res) => {
 });
 
 export default router;
+
+//get all user post in profile section
+
+router.get("/profile/:username", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username });
+    const post = await Post.find({ userID: user._id });
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Like dislike a post
+
+router.put("/:id/like", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post.likes.includes(req.body.userID)) {
+      await post.updateOne({ $push: { likes: req.body.userID } });
+      res.status(200).json("Post has been liked");
+    } else {
+      await post.updateOne({ $pull: { likes: req.body.userID } });
+      res.status(200).json("Post has been disliked");
+    }
+  } catch (err) {}
+  res.status(500).json(err);
+});
