@@ -39,7 +39,7 @@ function Share() {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/post", newPost);
+      await axios.post("http://localhost:3000/api/posts", newPost);
       window.location.reload();
     } catch (err) {
       console.log(err);

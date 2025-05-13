@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 function Post({ post }) {
   const { user: currentUser } = useContext(AuthContext);
@@ -17,7 +17,7 @@ function Post({ post }) {
   const [isLiked, setIsLiked] = useState(false);
   const PF = import.meta.env.REACT_PUBLIC_FOLDER || "/assets/";
   const [user, setUser] = useState({});
-  const [moreClicked, setMoreClicked] = useState(false)
+  const [moreClicked, setMoreClicked] = useState(false);
   console.log("[POST_IMG_URL]", PF + post.img);
   useEffect(() => {
     console.log("Post received in Post.jsx:", post);
@@ -46,7 +46,7 @@ function Post({ post }) {
 
   const likeHandler = async () => {
     try {
-      await axios.put("http://localhost:3000/api/post/" + post._id + "/like", {
+      await axios.put("http://localhost:3000/api/posts/" + post._id + "/like", {
         userID: currentUser._id,
       });
     } catch (err) {}
@@ -58,28 +58,28 @@ function Post({ post }) {
   };
 
   const handleMore = () => {
-    setMoreClicked(!moreClicked)
-  }
+    setMoreClicked(!moreClicked);
+  };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     try {
-    await axios.delete(`http://localhost:3000/api/post/${post._id}`, {
-      data: { userID: user._id },
-    });
-    alert("Post deleted!");
-window.location.reload();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-  const handleEdit = async() => {
-    try{
-      await axios.put(`http://localhost:3000/api/post/${post._id}`)
-    }catch(err){
-      console.log(err)
+      await axios.delete(`http://localhost:3000/api/posts/${post._id}`, {
+        data: { userID: user._id },
+      });
+      alert("Post deleted!");
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
+
+  const handleEdit = async () => {
+    try {
+      await axios.put(`http://localhost:3000/api/posts/${post._id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="post">
@@ -107,14 +107,36 @@ window.location.reload();
             <button className="post-3dots" onClick={handleMore}>
               <MoreVertIcon />
             </button>
-            {!moreClicked ? ("") : (<div className="more-container">
+            {!moreClicked ? (
+              ""
+            ) : (
+              <div className="more-container">
                 <div className="more-options">
                   <div className="more-edit" onClick={handleEdit}>
-                    <EditIcon/>Edit</div>
-                  <div className="more-edit" onClick={handleDelete} style={{ color: 'red', display: 'flex', alignItems: 'center' }}>
-                    <DeleteIcon style={{ color: 'red', marginRight: '8px', fontSize: '16px' }}/>Delete</div>
+                    <EditIcon />
+                    Edit
+                  </div>
+                  <div
+                    className="more-edit"
+                    onClick={handleDelete}
+                    style={{
+                      color: "red",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <DeleteIcon
+                      style={{
+                        color: "red",
+                        marginRight: "8px",
+                        fontSize: "16px",
+                      }}
+                    />
+                    Delete
+                  </div>
                 </div>
-            </div>)}
+              </div>
+            )}
           </div>
         </div>
         <div className="post-mid">

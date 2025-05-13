@@ -12,9 +12,9 @@ function Feed({ username }) {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
-        ? await axios.get(`http://localhost:3000/api/post/profile/${username}`)
+        ? await axios.get(`http://localhost:3000/api/posts/profile/${username}`)
         : await axios.get(
-            "http://localhost:3000/api/post/timeline/" + user._id
+            "http://localhost:3000/api/posts/timeline/" + user._id
           );
       console.log("API response:", res.data);
       setPost(
