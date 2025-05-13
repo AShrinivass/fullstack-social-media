@@ -23,7 +23,7 @@ app.use(morgan("common"));
 app.use(helmet());
 app.use("/api/users", users);
 app.use("/api/auth", authRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/posts", postRoutes);
 
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
